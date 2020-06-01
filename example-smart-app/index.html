@@ -92,15 +92,20 @@
             var myICN = pt.identifier.filter(myId => myId.system === "urn:oid:2.16.840.1.113883.3.13.8")[0].id;
             console.log(myICN);
             console.log(pt);
+          },
+          function(error) {
+            console.log(error);
           }
         );
 
+        <!--
         // Render the current encounter
         client.encounter.read().then(
           function(enc) {
             console.log(enc);
           }
         );
+        -->
 
       });
     </script>
