@@ -89,7 +89,9 @@
         // Render the current patient (or any error)
         client.patient.read().then(
           function(pt) {
-            console.log(pt)
+            var myICN = pt.identifier.filter(myId => myId.system === "urn:oid:2.16.840.1.113883.3.13.8")[0].id;
+            console.log(myICN);
+            console.log(pt);
           }
         );
       });
