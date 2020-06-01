@@ -101,7 +101,9 @@
         client.encounter.read().then(
           function(enc) {
             var myLocation = enc.location[0].location.reference;
+            var myOrganization = enc.serviceProvider.reference;
             console.log(myLocation);
+            console.log(myOrganization);
           },
           function(error) {
             console.log(error);
