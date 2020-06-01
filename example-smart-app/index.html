@@ -116,6 +116,10 @@
         // Get organization data
         .then( () => {
           console.log(myOrganization);
+          client.request(myOrganization).then(
+            (org)   => console.log(org),
+            (error) => console.log(error)
+          );
         });
 
 
