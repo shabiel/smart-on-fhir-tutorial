@@ -94,6 +94,14 @@
             console.log(pt);
           }
         );
+
+        // Render the current encounter
+        client.encounter.read().then(
+          function(enc) {
+            console.log(enc);
+          }
+        );
+
       });
     </script>
   </body>
