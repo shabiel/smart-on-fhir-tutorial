@@ -86,10 +86,14 @@
     <script>
       FHIR.oauth2.ready().then(function(client) {
 
+        var myICN;
+        var myOrganization;
+        var myLocation;
+
         // Render the current patient (or any error)
         client.patient.read().then(
           function(pt) {
-            var myICN = pt.identifier.filter(myId => myId.system === "urn:oid:2.16.840.1.113883.3.13.8")[0].id;
+            myICN = pt.identifier.filter(myId => myId.system === "urn:oid:2.16.840.1.113883.3.13.8")[0].id;
             console.log(myICN);
           },
           function(error) {
@@ -100,15 +104,20 @@
         // Render the current encounter
         client.encounter.read().then(
           function(enc) {
-            var myLocation = enc.location[0].location.reference;
-            var myOrganization = enc.serviceProvider.reference;
+            myLocation = enc.location[0].location.reference;
+            myOrganization = enc.serviceProvider.reference;
             console.log(myLocation);
-            console.log(myOrganization);
           },
           function(error) {
             console.log(error);
           }
-        );
+        )
+        
+        // Get organization data
+        .then( () => {
+          console.log(myOrganization);
+        });
+
 
       });
     </script>
