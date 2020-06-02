@@ -20,7 +20,7 @@
       <div class="bounce3"></div>
     </div>
     <div id='holder' >
-      <h2>Example-SMART-App</h2>
+      <h2>Sam's-SMART-App</h2>
 
       <h2>Patient Resource</h2>
       <table>
@@ -82,7 +82,8 @@
 
         // Render the current patient (or any error)
         client.patient.read().then(
-          function(pt) {
+          (pt) => {
+            console.log(pt);
             myICN = pt.identifier.filter(myId => myId.system === "urn:oid:2.16.840.1.113883.3.42.10001.100001.12")[0].id;
 
             var gender = pt.gender;
@@ -104,19 +105,19 @@
             document.getElementById('birthdate').innerText = birthdate;
             document.getElementById('ICN').innerText = myICN;
           },
-          function(error) {
+          (error) => {
             console.log(error);
           }
         );
 
         // Render the current encounter
         client.encounter.read().then(
-          function(enc) {
+          (enc) => {
+            console.log(enc);
             myLocation = enc.location[0].location.reference;
             myOrganization = enc.serviceProvider.reference;
-            console.log(myLocation);
           },
-          function(error) {
+          (error) => {
             console.log(error);
           }
         )
