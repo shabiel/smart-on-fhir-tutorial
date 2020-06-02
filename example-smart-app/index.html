@@ -40,29 +40,21 @@
           <th>Date of Birth:</th>
           <td id='birthdate'></td>
         </tr>
+        <tr>
+          <th>ICN:</th>
+          <td id='ICN'></td>
+        </tr>
       </table>
-      <h2>Observation Resource</h2>
+      <h2>Location Data</h2>
       <table>
         <tr>
-          <th>Height:</th>
-          <td id='height'></td>
+          <th>Encounter Organization</th>
+          <td id='orgid'></td>
         </tr>
         <tr>
-          <th>Systolic Blood Pressure:</th>
-          <td id='systolicbp'></td>
+          <th>Organization Station Number</th>
+          <td id='sta'></td>
 
-        </tr>
-        <tr>
-          <th>Diastolic Blood Pressure:</th>
-          <td id='diastolicbp'></td>
-        </tr>
-        <tr>
-          <th>LDL:</th>
-          <td id='ldl'></td>
-        </tr>
-        <tr>
-          <th>HDL:</th>
-          <td id='hdl'></td>
         </tr>
       </table>
     </div>
@@ -72,9 +64,6 @@
       <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js'></script>
       <script src='./lib/js/cerner-smart-embeddable-lib-1.0.0.min.js'></script>
     -->
-
-    <!-- Application-level javascript-->
-    <script src='./src/js/example-smart-app.js'></script>
 
     <!-- FHIR Client JS Library -->
     <script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>
@@ -96,6 +85,25 @@
           function(pt) {
             myICN = pt.identifier.filter(myId => myId.system === "urn:oid:2.16.840.1.113883.3.42.10001.100001.12")[0].id;
             console.log(myICN);
+
+            var gender = pt.gender;
+            var birthdate = pt.birthDate;
+
+            var fname = '';
+            var lname = '';
+
+            if (typeof pt.name[0] !== 'undefined') {
+              fname = pt.name[0].given.join(' ');
+              lname = pt.name[0].family.join(' ');
+            }
+
+            document.getElementById('#holder').show();
+            document.getElementById('#loading').hide();
+            document.getElementById('#fname').html(fname);
+            document.getElementById('#lname').html(lname);
+            document.getElementById('#gender').html(gender);
+            document.getElementById('#birthdate').html(birthdate);
+            document.getElementById('#ICN').html(birthdate);
           },
           function(error) {
             console.log(error);
