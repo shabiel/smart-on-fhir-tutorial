@@ -93,17 +93,17 @@
             var lname = '';
 
             if (typeof pt.name[0] !== 'undefined') {
-              fname = pt.name[0].given;
+              fname = pt.name[0].given.join(' ');
               lname = pt.name[0].family;
             }
 
-            document.getElementById('#holder').show();
-            document.getElementById('#loading').hide();
-            document.getElementById('#fname').html(fname);
-            document.getElementById('#lname').html(lname);
-            document.getElementById('#gender').html(gender);
-            document.getElementById('#birthdate').html(birthdate);
-            document.getElementById('#ICN').html(birthdate);
+            document.getElementById('holder').style.display = "block";
+            document.getElementById('loading').style.display = "none";
+            document.getElementById('fname').innerText = fname;
+            document.getElementById('lname').innerText = lname;
+            document.getElementById('gender').innerText = gender;
+            document.getElementById('birthdate').innerText = birthdate;
+            document.getElementById('ICN').innerText = myICN;
           },
           function(error) {
             console.log(error);
