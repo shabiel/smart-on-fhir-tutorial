@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='X-UA-Compatible' content='IE=edge' />
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-    <title>Example-SMART-App</title>
+    <title>Sam's-SMART-App</title>
 
     <link rel='stylesheet' type='text/css' href='./src/css/example-smart-app.css'>
     <!--
@@ -49,7 +49,7 @@
       <table>
         <tr>
           <th>Encounter Organization</th>
-          <td id='orgid'></td>
+          <td id='orgName'></td>
         </tr>
         <tr>
           <th>Organization Station Number</th>
@@ -84,7 +84,6 @@
         client.patient.read().then(
           function(pt) {
             myICN = pt.identifier.filter(myId => myId.system === "urn:oid:2.16.840.1.113883.3.42.10001.100001.12")[0].id;
-            console.log(myICN);
 
             var gender = pt.gender;
             var birthdate = pt.birthDate;
@@ -124,12 +123,12 @@
         
         // Get organization data
         .then( () => {
-          console.log(myOrganization);
           client.request(myOrganization).then(
             (org)   => {
               console.log(org);
+              document.getElementById('orgName').innerText = org.name;
               stationNumber = org.identifier[0].value;
-              console.log(stationNumber);
+              document.getElementById('sta').innerText = stationNumber;
             },
             (error) => console.log(error)
           );
