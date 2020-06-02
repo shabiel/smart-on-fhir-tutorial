@@ -93,8 +93,8 @@
             var lname = '';
 
             if (typeof pt.name[0] !== 'undefined') {
-              fname = pt.name[0].given.join(' ');
-              lname = pt.name[0].family.join(' ');
+              fname = pt.name[0].given;
+              lname = pt.name[0].family;
             }
 
             document.getElementById('#holder').show();
