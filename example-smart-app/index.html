@@ -106,7 +106,7 @@
             document.getElementById('ICN').innerText = myICN;
           },
           (error) => {
-            console.log(error);
+            document.getElementById('errors').insertAdjacentHTML('beforeend', '<p>' + error.message + '</p>');
           }
         );
 
@@ -118,7 +118,7 @@
             myOrganization = enc.serviceProvider.reference;
           },
           (error) => {
-            document.getElementById('errors').insertAdjacentHTML('beforeend', error.message);
+            document.getElementById('errors').insertAdjacentHTML('beforeend', '<p>' + error.message + '</p>');
           }
         )
         
@@ -132,7 +132,7 @@
               document.getElementById('sta').innerText = stationNumber;
             },
             (error) => {
-              document.getElementById('errors').insertAdjacentHTML('beforeend', error.message);
+              document.getElementById('errors').insertAdjacentHTML('beforeend', '<p>' + error.message + '</p>');
             }
           );
         });
@@ -141,9 +141,21 @@
         client.request('/Observations?patient=' + client.patient.id).then(
           (obs) => {}, // nothing will happen as we don't have access
           (error) => {
-            document.getElementById('errors').insertAdjacentHTML('beforeend', error.message);
+            document.getElementById('errors').insertAdjacentHTML('beforeend', '<p>' + error.message + '</p>');
           }
         );
+
+        // Get Medications (shoudln't work... another error)
+        client.request("/MedicationRequest?patient=" + client.patient.id, {
+          resolveReferences: [ "medicationReference" ],
+          graph: true
+        }).then(
+          (meds) => {}, //nothing will happen as we don't have access
+          (error) => {
+            document.getElementById('errors').insertAdjacentHTML('beforeend', '<p>' + error.message + '</p>');
+          }
+        );
+
       });
     </script>
   </body>
