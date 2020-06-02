@@ -118,7 +118,7 @@
             myOrganization = enc.serviceProvider.reference;
           },
           (error) => {
-            console.log(error);
+            document.getElementById('errors').insertAdjacentHTML('beforeend', error.message);
           }
         )
         
@@ -132,7 +132,7 @@
               document.getElementById('sta').innerText = stationNumber;
             },
             (error) => {
-              console.log(error);
+              document.getElementById('errors').insertAdjacentHTML('beforeend', error.message);
             }
           );
         });
@@ -141,7 +141,7 @@
         client.request('/Observations?patient=' + client.patient.id).then(
           (obs) => {}, // nothing will happen as we don't have access
           (error) => {
-            console.log(error);
+            document.getElementById('errors').insertAdjacentHTML('beforeend', error.message);
           }
         );
       });
