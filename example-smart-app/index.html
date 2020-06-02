@@ -89,11 +89,12 @@
         var myICN;
         var myOrganization;
         var myLocation;
+        var stationNumber;
 
         // Render the current patient (or any error)
         client.patient.read().then(
           function(pt) {
-            myICN = pt.identifier.filter(myId => myId.system === "urn:oid:2.16.840.1.113883.3.13.8")[0].id;
+            myICN = pt.identifier.filter(myId => myId.system === "urn:oid:2.16.840.1.113883.3.42.10001.100001.12")[0].id;
             console.log(myICN);
           },
           function(error) {
@@ -117,12 +118,14 @@
         .then( () => {
           console.log(myOrganization);
           client.request(myOrganization).then(
-            (org)   => console.log(org),
+            (org)   => {
+              console.log(org);
+              stationNumber = org.identifier[0].value;
+              console.log(stationNumber);
+            },
             (error) => console.log(error)
           );
         });
-
-
       });
     </script>
   </body>
