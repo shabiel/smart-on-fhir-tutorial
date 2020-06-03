@@ -81,10 +81,10 @@
         var stationNumber;
 
         // Render the current patient (or any error)
-        client.patient.read().then(
-          (pt) => {
+        client.patient.read().then(function(pt) 
+          {
             console.log(pt);
-            myICN = pt.identifier.filter(myId => myId.system === "urn:oid:2.16.840.1.113883.3.42.10001.100001.12")[0].id;
+            myICN = pt.identifier[0].id;
 
             var gender = pt.gender;
             var birthdate = pt.birthDate;
@@ -105,43 +105,43 @@
             document.getElementById('birthdate').innerText = birthdate;
             document.getElementById('ICN').innerText = myICN;
           },
-          (error) => {
-            document.getElementById('errors').insertAdjacentHTML('beforeend', '<p>' + error.message + '</p>');
+          function(error)  {
+            document.getElementById('errors').innerText += '<p>' + error.message + '</p>'
           }
         );
 
         // Render the current encounter
         client.encounter.read().then(
-          (enc) => {
+          function(enc) {
             console.log(enc);
             myLocation = enc.location[0].location.reference;
             myOrganization = enc.serviceProvider.reference;
           },
-          (error) => {
-            document.getElementById('errors').insertAdjacentHTML('beforeend', '<p>' + error.message + '</p>');
+          function(error) {
+            document.getElementById('errors').innerText += '<p>' + error.message + '</p>'
           }
         )
         
         // Get organization data
-        .then( () => {
+        .then( function() {
           client.request(myOrganization).then(
-            (org)   => {
+            function(org) {
               console.log(org);
               document.getElementById('orgName').innerText = org.name;
               stationNumber = org.identifier[0].value;
               document.getElementById('sta').innerText = stationNumber;
             },
-            (error) => {
-              document.getElementById('errors').insertAdjacentHTML('beforeend', '<p>' + error.message + '</p>');
+            function(error) {
+              document.getElementById('errors').innerText += '<p>' + error.message + '</p>'
             }
           );
         });
 
         // Get Observations (shouldn't work... testing error)
         client.request('/Observations?patient=' + client.patient.id).then(
-          (obs) => {}, // nothing will happen as we don't have access
-          (error) => {
-            document.getElementById('errors').insertAdjacentHTML('beforeend', '<p>' + error.message + '</p>');
+          function(obs) {}, // nothing will happen as we don't have access
+          function(error) {
+            document.getElementById('errors').innerText += '<p>' + error.message + '</p>'
           }
         );
 
@@ -150,9 +150,9 @@
           resolveReferences: [ "medicationReference" ],
           graph: true
         }).then(
-          (meds) => {}, //nothing will happen as we don't have access
-          (error) => {
-            document.getElementById('errors').insertAdjacentHTML('beforeend', '<p>' + error.message + '</p>');
+          function(meds) {}, //nothing will happen as we don't have access
+          function(error) {
+            document.getElementById('errors').innerText += '<p>' + error.message + '</p>'
           }
         );
 
