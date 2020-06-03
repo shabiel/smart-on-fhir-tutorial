@@ -106,7 +106,7 @@
             document.getElementById('ICN').innerText = myICN;
           },
           function(error)  {
-            document.getElementById('errors').innerText += '<p>' + error.message + '</p>'
+            document.getElementById('errors').innerHTML += '<p>' + error.message + '</p>'
           }
         );
 
@@ -118,7 +118,7 @@
             myOrganization = enc.serviceProvider.reference;
           },
           function(error) {
-            document.getElementById('errors').innerText += '<p>' + error.message + '</p>'
+            document.getElementById('errors').innerHTML += '<p>' + error.message + '</p>'
           }
         )
         
@@ -132,7 +132,7 @@
               document.getElementById('sta').innerText = stationNumber;
             },
             function(error) {
-              document.getElementById('errors').innerText += '<p>' + error.message + '</p>'
+              document.getElementById('errors').innerHTML += '<p>' + error.message + '</p>'
             }
           );
         });
@@ -141,7 +141,7 @@
         client.request('/Observations?patient=' + client.patient.id).then(
           function(obs) {}, // nothing will happen as we don't have access
           function(error) {
-            document.getElementById('errors').innerText += '<p>' + error.message + '</p>'
+            document.getElementById('errors').innerHTML += '<p>' + error.message + '</p>'
           }
         );
 
@@ -152,7 +152,7 @@
         }).then(
           function(meds) {}, //nothing will happen as we don't have access
           function(error) {
-            document.getElementById('errors').innerText += '<p>' + error.message + '</p>'
+            document.getElementById('errors').innerHTML += '<p>' + error.message + '</p>'
           }
         );
 
