@@ -140,17 +140,6 @@ FHIR.oauth2.ready().then(function(client) {
             var cell = row.insertCell();
             cell.appendChild(document.createTextNode(STA_REGEX.test(item.value)));
           });
-
-          // Timer to jump
-          var time = 10;
-          var interval = setInterval(function() {
-            time--;
-            document.getElementById('redirectTimer').innerText = 'Redirecting to MHA Web in ' + time;
-            if (time <= 0) {
-              clearInterval(interval);
-              //window.location.href = '/app/home/?station=964&poi=100850';
-            }
-          }, 1000); //setInterval
         },
         function(error) {
           document.getElementById('errors').innerHTML += '<p>' + error.message + '</p>';
